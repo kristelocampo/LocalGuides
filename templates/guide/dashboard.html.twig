@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Guide Dashboard{% endblock %}
+
+{% block body %}
+
+
+    <h1>Welcome {{ guide.firstname }} {{ guide.lastname }} <a href="{{ path('app_guide_edit', {'id': guide.id}) }}">Edit</a></h1>
+
+    <div class="guide-dashboard">
+        <div class="guide-about">
+            <h2>About You</h2>
+            <p>Firstname: {{ guide.firstname }}</p>
+            <p>Lastname: {{ guide.lastname }}</p>
+            <p class="bio">Bio : {{ guide.bio }}</p>
+        </div>
+        <div class="guide-infos">
+        {% if language is not empty %}
+            <h2>Languages Spoken</h2>
+            <div class="guide-language">
+                {% for lang in language %}
+                    <div>{{ lang.name }}</div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <h2>No Language spoken</h2>
+        {% endif %}
+            <h2>Location</h2>
+            <p> {{ location.location }}</p>
+        </div>
+    </div>
+
+    <article class="articles">
+        <h2>Articles</h2>
+        <div class="article">
+            {% if articles is not empty %}
+                {% for article in articles %}
+                    <section class="article-item">
+                        <h3 class="title"><a href="{{ path('app_article_show_user', {'id': article.id}) }}">{{ article.title }}</a></h3>
+                        <p>{{ article.context }}</p>
+                    </section>
+                {% endfor %}
+            {% else %}
+                <p>No Articles added</p>
+                <p><a href="{{ path('app_article_new') }}">Add Article</a></p>
+            {% endif %}
+        </div>
+    </article>
+
+    <article class="itineraries">
+        <h2>Itineraries</h2>
+        <div class="itinerary">
+            {% if itineraries is not empty %}
+                {% for itinerary in itineraries %}
+                    <section class="itinerary-item">
+                        {% if itinerary.name is not empty %}
+                            <img src="{{ asset('img/itinerary/' ~ itinerary.name) }}" alt="{{ itinerary.title }}" class="itinerary-images">
+                        {% endif %}
+                        <h3 class="title"><a href="{{ path('app_itinerary_show_user', {'id': itinerary.id}) }}">{{ itinerary.title }}</a></h3>
+                        <p class="description">{{ itinerary.description }}</p>
+                        <p class="tarif">{{ itinerary.tarif }}€</p>
+                    </section>
+                {% endfor %}
+            {% else %}
+                <p>No Articles added</p>
+                <p><a href="{{ path('app_itineraries_new') }}">Add Itinerary</a></p>
+            {% endif %}
+        </div>
+    </article>
+{% endblock %}

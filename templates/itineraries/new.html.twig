@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Itineraries{% endblock %}
+
+{% block body %}
+    <div class="forms">
+        <h1>Create new Itineraries</h1>
+
+        {{ include('itineraries/_form.html.twig') }}
+
+        <button class="btn"><a href="{{ path('app_itineraries_index') }}">back to list</a> </button>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Itineraries index{% endblock %}
+
+{% block body %}
+    <h1>Itineraries index</h1>
+    <div class="create">
+        <a href="{{ path('app_itineraries_new') }}">Create new</a>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Created_date</th>
+                <th>Tarif</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for itinerary in itineraries %}
+            <tr>
+                <td>{{ itinerary.id }}</td>
+                <td>{{ itinerary.title }}</td>
+                <td>{{ itinerary.description }}</td>
+                <td>{{ itinerary.createdDate ? itinerary.createdDate|date('Y-m-d') : '' }}</td>
+                <td>{{ itinerary.tarif }}</td>
+                <td class="image-td"><img src="{{ asset('/img/itinerary/' ~ itinerary.name) }}" alt="{{ itinerary.title }}" ></td>
+                <td class="actions">
+                    <a href="{{ path('app_itineraries_show', {'id': itinerary.id}) }}">show</a>
+                    <a href="{{ path('app_itineraries_edit', {'id': itinerary.id}) }}">edit</a>
+                    <a href="{{ path('app_itineraries_delete', {'id': itinerary.id}) }}">delete</a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

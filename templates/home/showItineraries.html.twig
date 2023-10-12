@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Show Itineraries{% endblock %}
+
+{% block body %}
+    <article class="itineraries-details">
+        <div class="itinerary-details">
+            {% if images is not empty %}
+                <div class="itinerary-images">
+                    {% for image in images %}
+                        <img src="{{ asset('img/itinerary/' ~ image.name) }}" alt="{{ itinerary.title }}">
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <h1>{{ itinerary.title }}</h1>
+            <p>{{ itinerary.description }}</p>
+            <p>{{ itinerary.createdDate|date('D, d M Y')}}</p>
+        </div>
+        <div class="guide-details">
+            <h2>Meet your Guide</h2>
+            {% if is_granted("ROLE_USER") and not is_granted("ROLE_GUIDE")  %}
+                <p>Written By: <a href="{{ path('app_guide_details', {'idGuide': itinerary.idGuide}) }}">{{ itinerary.firstname }} {{ itinerary.lastname }}</a></p>
+                <p>{{ itinerary.bio }}</p>
+                <p>Mail :  <a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
+                <p>Telephone : <a href="tel:{{ itinerary.telNumber }}">{{ itinerary.telNumber }}</a></p>
+            {% else %}
+                <p>{{ itinerary.firstname }} {{ itinerary.lastname }}</p>
+                <p>{{ itinerary.bio }}</p>
+                <p>Telephone : <a href="tel:{{ itinerary.telNumber }}">{{ itinerary.telNumber }}</a></p>
+            {% endif%}
+            <p>Tarif : {{ itinerary.tarif }} €</p>
+        </div>
+    </article>
+
+    <div class="review-form">
+    {% if is_granted("ROLE_USER") and not is_granted("ROLE_GUIDE")  %}
+        <form method="POST" action="{{ path('app_itinerary_show_user', {'id': itinerary.id}) }}">
+            {{ form_widget(form) }}
+            <button class="btn" type="submit">Submit</button>
+        </form>
+
+    {% endif %}
+    </div>
+
+    <article class="reviews">
+        <h2>Reviews</h2>
+        {% if reviews is not empty %}
+            {% for review in reviews %}
+                <section>
+                    <p>{{ review.username }}</p>
+                    <p>Rating: {{ review.rating|ratingStars }}</p>
+                    <p>Comments: {{ review.comment }}</p>
+                </section>
+            {% endfor %}
+        {% else %}
+            <p>No reviews available.</p>
+        {% endif %}
+
+    </article>
+{% endblock %}

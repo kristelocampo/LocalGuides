@@ -1,0 +1,473 @@
+*{
+    box-sizing: border-box;
+    font-family: "Belleza" , "Open Sans";
+}
+
+@font-face{
+    font-family: "Belleza", "Open Sans";
+    src: url("https://fonts.google.com/specimen/Belleza?query=belleza");
+}
+
+li, ul, ol {
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+body{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.logo a img{
+    height: 100px;
+    width: auto;
+}
+
+h1, h2, h3, h4, h5, h6{
+    text-align:center;
+}
+
+h1 {
+    font-size: 30px;
+}
+
+h2{
+    font-size: 25px;
+}
+
+h3{
+    font-size: 20px;
+}
+
+/*------ Navigation -----*/
+.nav-menu{
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-list{
+    display: none;
+}
+
+.nav-list.active{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    max-height: 100%;
+    background-color: aliceblue;
+    font-weight: 100;
+}
+
+.nav-item{
+    padding: 20px;
+    font-size: 20px;
+}
+
+.nav-item:hover{
+    background-size: 100% 100%;
+    background-position: 50% 50%;
+    transition: background-position .7s, background-size .5s ease-in-out;
+}
+
+
+.icon{
+    max-height: 20px;
+}
+
+.close{
+    display:none;
+}
+
+
+@media only screen and (min-width: 991px) {
+    .nav-toggle{
+        display: none;
+    }
+
+    .close{
+        display: none;
+    }
+
+    .nav-list{
+        display: flex;
+    }
+
+    .nav-item{
+        position: relative;
+        padding: 20px;
+        color: black;
+        font-size: 20px;
+        font-weight: 100;
+        background-image: linear-gradient(deepskyblue, cornflowerblue);
+        background-size: 100% 10px;
+        background-repeat: no-repeat;
+        background-position: 50% 100%;
+        transition: background-size .7s, background-position .5s ease-in-out;
+    }
+
+    .nav-item:hover{
+        background-size: 100% 100%;
+        background-position: 50% 50%;
+        transition: background-position .7s, background-size .5s ease-in-out;
+    }
+
+    .nav-item:hover a{
+        color: white;
+    }
+
+}
+
+.welcome{
+    padding: 10px;
+    text-align: center;
+    background-image: linear-gradient(aliceblue, skyblue);
+    background-size: 30% 10px;
+    background-repeat: no-repeat;
+    background-position: 50% 100%;
+    transition: background-size .7s, background-position .5s ease-in-out;
+}
+
+.welcome:hover{
+    background-size: 100% 100%;
+    background-position: 50% 50%;
+    transition: background-position .7s, background-size .5s ease-in-out;
+}
+
+.welcome:hover p{
+    color:white;
+}
+
+/*----------------- Home -----------*/
+
+
+.itinerary {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    align-items: flex-start;
+}
+
+.itinerary-item{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px;
+}
+
+.title{
+    width: 100%;
+    height: 50px;
+}
+
+.description{
+    height: 150px;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tarif{
+    font-size: 18px;
+}
+
+.article {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    align-items: flex-start;
+}
+
+.article-item{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px;
+}
+
+.context{
+    height: 150px;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.itinerary-item img{
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    margin: auto;
+}
+
+@media only screen and (min-width: 991px) {
+
+    .itinerary-item{
+        max-width: 33%;
+    }
+
+    .article-item{
+        max-width: 33%;
+    }
+}
+
+.back{
+    background-image: linear-gradient(-180deg, #37AEE2 0%, #1E96C8 100%);
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 10px 20px;
+}
+
+.back a{
+    color: white;
+}
+
+.back:hover{
+    background-image: linear-gradient(-180deg, #1D95C9 0%, #17759C 100%);
+}
+
+.itineraries-details{
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: justify;
+}
+
+
+.articles-details{
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: justify;
+}
+
+.guide-details h2,
+.itinerary-details h1,
+.article-detail h1{
+    height: 100px;
+    margin: auto;
+}
+
+.reviews{
+    padding: 20px;
+    text-align: center;
+}
+
+.reviews h2{
+    color: darkblue;
+}
+
+.guide-info{
+    text-align: center;
+    max-width: 80%;
+    margin: auto;
+}
+
+@media only screen and (min-width: 991px) {
+    .itineraries-details,
+    .articles-details{
+        flex-wrap: nowrap;
+        justify-content: space-evenly;
+    }
+
+    .itinerary-details,
+    .article-detail{
+        width: 60%;
+    }
+
+    .guide-details{
+        width: 30%;
+    }
+
+}
+
+/*--------Guide------*/
+
+.guide-dashboard{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.guide-about{
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+}
+
+.guide-infos{
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+}
+
+.bio{
+    max-width: 70%;
+    margin: auto;
+    text-align: justify;
+}
+
+@media (min-width: 991px){
+    .guide-dashboard{
+        flex-wrap: nowrap;
+    }
+
+}
+
+/*---- Forms ---*/
+
+.registration-form,
+.container-login{
+    text-align: center;
+    background: linear-gradient(45deg, deepskyblue 10%, #A2C7E5 90%);
+    padding: 20px;
+    max-width: 500px;
+    margin: auto;
+}
+
+label{
+    display: block;
+    padding: 10px;
+}
+
+input{
+    display: block;
+    width: 70%;
+    font-size: 16px;
+    margin: auto;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+textarea{
+    display: block;
+    width: 70%;
+    margin: auto;
+    min-height: 100px;
+    overflow: auto;
+}
+
+.mult-select-tag{
+    width: 70%;
+    margin: auto;
+}
+
+.btn{
+   padding: 20px;
+}
+
+.btn.hover{
+    background: linear-gradient(45deg, dodgerblue 10%, blanchedalmond 90%);
+}
+
+.review-form{
+    text-align: center;
+    max-width: 50%;
+    margin: auto;
+}
+
+.forms{
+    text-align: center;
+    font-size: 18px;
+    border: solid #606060 2px;
+    border-radius: 10px;
+    max-width: 80%;
+    margin: auto;
+}
+
+
+/*------ Tables -----*/
+.table img{
+    max-width: 200px;
+
+}
+
+table {
+    max-width: 90%;
+    margin: auto;
+}
+
+table thead {
+    display: none;
+}
+
+table td {
+    display: flex;
+}
+
+table td::before {
+    content: attr(label);
+    font-weight: bold;
+    width: 120px;
+    min-width: 120px;
+}
+
+@media screen and (min-width: 991px) {
+    table thead {
+        display: revert;
+    }
+
+    table td {
+        display: table-cell;
+    }
+
+    table td::before {
+        content: none;
+    }
+}
+
+.create{
+    max-width: 95%;
+    text-align: right;
+}
+
+.create a{
+    background: aliceblue;
+    padding: 10px;
+    border: solid 2px;
+    border-radius: 10px;
+}
+
+.actions a{
+    padding:10px
+}
+
+.admin{
+    display: flex;
+    max-width: 80%;
+    margin: auto;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dashboard{
+    width: 50%;
+    margin: 20px;
+    padding: 20px;
+    background: #1E96C8;
+}
+
+.dashboard:hover{
+    background: #0d5aa7;
+}
+
+.dashboard h2 a{
+    color: white;
+}
+
+
+.image-table{
+    max-width: 300px;
+}

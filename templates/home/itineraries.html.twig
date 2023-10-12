@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+     {% if is_granted("ROLE_USER") %}
+         <div class="welcome">
+             <h1>Welcome {{ user.username }}</h1>
+             <p>Explore your city with our local guides.</p>
+         </div>
+     {% else %}
+         <div class="welcome">
+             <h1>Welcome to Local Guide</h1>
+             <p>Explore your city with our local guides.</p>
+         </div>
+     {% endif %}
+        <div>
+            <p>Que vous soyez intéressé par l'art, la cuisine, l'histoire ou l'aventure, nous avons un itinéraire qui correspond à vos préférences. Chaque visite est adaptée à vos besoins.</p>
+        </div>
+    <article class="itineraries">
+        <h2>Itineraries</h2>
+        <div class="itinerary">
+        {% for itinerary in showItineraries %}
+            <section class="itinerary-item">
+                {% if itinerary.name is not empty %}
+                    <img src="{{ asset('img/itinerary/' ~ itinerary.name) }}" alt="{{ itinerary.title }}" class="itinerary-images">
+                {% endif %}
+                <h3 class="title"><a href="{{ path('app_itinerary_show_user', {'id': itinerary.id}) }}">{{ itinerary.title }}</a></h3>
+                <p class="description">{{ itinerary.description }}</p>
+                <p class="tarif">{{ itinerary.tarif }} €</p>
+                {% if is_granted("ROLE_USER") and not is_granted("ROLE_GUIDE")%}
+                    <p class="author">Written By: <a href="{{ path('app_guide_details', {'idGuide': itinerary.idGuide}) }}">{{ itinerary.firstname }} {{ itinerary.lastname }}</a></p>
+                {% else %}
+                    <p class="author">Written By: {{ itinerary.firstname }} {{ itinerary.lastname }}</p>
+                {% endif%}
+            </section>
+        {% endfor %}
+        </div>
+    </article>
+{% endblock %}

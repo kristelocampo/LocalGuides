@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    <div class="welcome">
+        <h1>Welcome {{ user.username }}</h1>
+        <p>Explore your city with our local guides.</p>
+    </div>
+    <article>
+        <h2>Itineraries</h2>
+        {% for itinerary in showItineraries %}
+            <section>
+                <h3><a href="{{ path('app_itinerary_show_user', {'id': itinerary.id}) }}">{{ itinerary.title }}</a></h3>
+                <p>{{ itinerary.description }}</p>
+                <p>{{ itinerary.tarif }}€</p>
+                <p>{{ itinerary.firstname }} {{ itinerary.lastname }}</p>
+            </section>
+        {% endfor %}
+    </article>
+    <article>
+        <h2>Articles</h2>
+        {% for article in showArticles %}
+            <section>
+                <h3><a href="{{ path('app_article_show_user', {'id': article.id}) }}">{{ article.title }}</a></h3>
+                <p>{{ article.context }}</p>
+                <p>Written By: {{ article.firstname }} {{ article.lastname }}</p>
+            </section>
+        {% endfor %}
+    </article>
+
+{% endblock %}

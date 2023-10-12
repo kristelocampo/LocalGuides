@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Show Article{% endblock %}
+
+{% block body %}
+
+    <div class="guide-info">
+        <h1>Guide Details</h1>
+        <p>Name : {{ guide.firstname}} {{ guide.lastname }}</p>
+        <p>Email : <a href="mailto:{{ guide.email }}">{{ guide.email }}</a></p>
+        <p>Mobile : <a href="=tel{{ guide.telNumber }}">{{ guide.telNumber }}</a></p>
+        <p>{{ guide.bio }}</p>
+    </div>
+
+    <article class="articles">
+        <h2>Articles</h2>
+        <div class="article">
+            {% for article in articles %}
+                <section class="article-item">
+                    <h3 class="title"><a href="{{ path('app_article_show_user', {'id': article.id}) }}">{{ article.title }}</a></h3>
+                    <p>{{ article.context }}</p>
+                </section>
+            {% endfor %}
+        </div>
+    </article>
+    <article class="itineraries">
+        <h2>Itineraries</h2>
+        <div class="itinerary">
+            {% for itinerary in itineraries %}
+                <section class="itinerary-item">
+                    {% if itinerary.name is not empty %}
+                        <img src="{{ asset('img/itinerary/' ~ itinerary.name) }}" alt="{{ itinerary.title }}" class="itinerary-images">
+                    {% endif %}
+                    <h3 class="title"><a href="{{ path('app_itinerary_show_user', {'id': itinerary.id}) }}">{{ itinerary.title }}</a></h3>
+                    <p class="description">{{ itinerary.description }}</p>
+                    <p class="tarif">{{ itinerary.tarif }} €</p>
+                </section>
+            {% endfor %}
+        </div>
+    </article>
+
+{% endblock %}

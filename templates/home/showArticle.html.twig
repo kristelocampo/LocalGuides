@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Show Article{% endblock %}
+
+{% block body %}
+    <article class="articles-details">
+        <div class="article-detail">
+            <h1>{{ article.title }}</h1>
+            <p>{{ article.context }}</p>
+        </div>
+        <div class="guide-details">
+            <h2>Meet your Guide</h2>
+            {% if is_granted("ROLE_USER") and not is_granted("ROLE_GUIDE") %}
+                <p>Written By: <a href="{{ path('app_guide_details', {'idGuide': article.idGuide}) }}">{{ article.firstname }} {{ article.lastname }}</a></p>
+                <p>{{ article.bio }}</p>
+                <p>Mail :  <a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
+                <p>Telephone : <a href="tel:{{ article.telNumber }}">{{ article.telNumber }}</a></p>
+            {% else %}
+                <p>{{ article.firstname }} {{ article.lastname }}</p>
+                <p>{{ article.bio }}</p>
+                <p>Telephone : <a href="tel:{{ article.telNumber }}">{{ article.telNumber }}</a></p>
+            {% endif%}
+        </div>
+    </article>
+
+    <div class="review-form">
+    {% if is_granted("ROLE_USER") and not is_granted("ROLE_GUIDE")  %}
+        <form method="POST" action="{{ path('app_article_show_user', {'id': article.id})}}">
+            {{ form_widget(form) }}
+            <button class="btn" type="submit">Submit</button>
+        </form>
+    {% endif %}
+    </div>
+
+    <article class="reviews">
+        <h2>Reviews</h2>
+        {% if reviews is not empty %}
+            {% for review in reviews %}
+                <section>
+                    <p>Rating: {{ review.rating|ratingStars }}</p>
+                    <p>Comments: {{ review.comment }}</p>
+                    <p>By: {{ review.username }}</p>
+                </section>
+            {% endfor %}
+        {% else %}
+            <p>No reviews available for this Article.</p>
+        {% endif %}
+    </article>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    {% if is_granted("ROLE_USER") %}
+        <div class="welcome">
+            <h1>Welcome {{ user.username }} </h1>
+        </div>
+    {% else %}
+        <div class="welcome">
+            <h1>Welcome to Local Guide</h1>
+            <p>Explore your city with our local guides.</p>
+        </div>
+    {% endif %}
+        <div>
+            <p>Bienvenue dans le monde captivant de Local Guide, où nous vous invitons à vivre une expérience de voyage tout à fait unique. Notre mission est de vous faire découvrir les trésors cachés et les joyaux de notre région, en offrant des visites guidées passionnantes, des itinéraires inoubliables et une immersion complète dans la culture locale. Laissez-nous être votre compagnon de voyage pour une aventure authentique et mémorable.</p>
+        </div>
+
+    <article class="itineraries">
+        <h2><a href="{{ path('app_itinerary') }}">Itineraries</a></h2>
+        <div class="itinerary">
+        {% for itinerary in showItineraries|slice(0, 6) %}
+            <section class="itinerary-item">
+                {% if itinerary.name is not empty %}
+                    <img src="{{ asset('img/itinerary/' ~ itinerary.name) }}" alt="{{ itinerary.title }}" class="itinerary-images">
+                {% endif %}
+                <h3 class="title"><a href="{{ path('app_itinerary_show_user', {'id': itinerary.id}) }}">{{ itinerary.title }}</a></h3>
+                <p class="description">{{ itinerary.description }}</p>
+                <p class="tarif">{{ itinerary.tarif }} €</p>
+                {% if is_granted("ROLE_USER") and not is_granted("ROLE_GUIDE")%}
+                    <p class="author">Written By: <a href="{{ path('app_guide_details', {'idGuide': itinerary.idGuide}) }}">{{ itinerary.firstname }} {{ itinerary.lastname }}</a></p>
+                {% else %}
+                    <p class="author">Written By: {{ itinerary.firstname }} {{ itinerary.lastname }}</p>
+                {% endif%}
+            </section>
+        {% endfor %}
+        </div>
+    </article>
+    <article class="articles">
+        <h2><a href="{{ path('app_articles') }}">Articles</a></h2>
+        <div class="article">
+        {% for article in showArticles|slice(0, 6) %}
+            <section class="article-item">
+                <h3 class="title"><a href="{{ path('app_article_show_user', {'id': article.id}) }}">{{ article.title }}</a></h3>
+                <p class="context">{{ article.context }}</p>
+                {% if is_granted("ROLE_USER") and not is_granted("ROLE_GUIDE")%}
+                    <p class="author">Written By: <a href="{{ path('app_guide_details', {'idGuide': article.idGuide}) }}">{{ article.firstname }} {{ article.lastname }}</a></p>
+                {% else %}
+                    <p class="author">{{ article.firstname }} {{ article.lastname }}</p>
+                {% endif%}
+            </section>
+        {% endfor %}
+        </div>
+    </article>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    {% if is_granted("ROLE_USER") %}
+        <div class="welcome">
+            <h1>Welcome {{ user.username }}</h1>
+            <p>Explore your city with our local guides.</p>
+        </div>
+    {% else %}
+        <div class="welcome">
+            <h1>Welcome to Local Guide</h1>
+            <p>Explore your city with our local guides.</p>
+        </div>
+    {% endif %}
+    <article class="articles">
+        <h2>Articles</h2>
+        <div class="article">
+        {% for article in showArticles %}
+            <section class="article-item">
+                <h3 class="title"><a href="{{ path('app_article_show_user', {'id': article.id}) }}">{{ article.title }}</a></h3>
+                <p class="context">{{ article.context }}</p>
+                {% if is_granted("ROLE_USER") and not is_granted("ROLE_GUIDE")%}
+                    <p class="author">Written By: <a href="{{ path('app_guide_details', {'idGuide': article.idGuide}) }}">{{ article.firstname }} {{ article.lastname }}</a></p>
+                {% else %}
+                    <p class="author">{{ article.firstname }} {{ article.lastname }}</p>
+                {% endif%}
+            </section>
+        {% endfor %}
+        </div>
+    </article>
+
+{% endblock %}

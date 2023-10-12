@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Itineraries{% endblock %}
+
+{% block body %}
+    <div class="forms">
+        <h1>Edit Itineraries</h1>
+
+        {{ include('itineraries/_form.html.twig', {'button_label': 'Update'}) }}
+
+        <a href="{{ path('app_itineraries_index') }}">back to list</a>
+
+        {{ include('itineraries/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

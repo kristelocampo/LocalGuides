@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <div class="registration-form">
+        <h1>Register</h1>
+
+        <div class="error">
+            {{ form_errors(registrationForm) }}
+        </div>
+
+        {{ form_start(registrationForm) }}
+
+            {{ form_row(registrationForm.firstname) }}
+            {{ form_row(registrationForm.lastname) }}
+            {{ form_row(registrationForm.bio) }}
+            {{ form_row(registrationForm.telNumber) }}
+            {{ form_row(registrationForm.languages, { 'attr': {'class': 'languages'} }) }}
+            {{ form_row(registrationForm.id_location)}}
+
+            <button type="submit" class="btn">Register</button>
+        {{ form_end(registrationForm) }}
+    </div>
+{% endblock %}

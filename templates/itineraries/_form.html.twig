@@ -1,0 +1,17 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+
+    {% if app.request.attributes.get('_route') == 'app_itineraries_edit' %}
+        <h2>Images</h2>
+        {% for image in images %}
+            <div>
+                {% if image.id is defined %}
+                    <img src="{{ asset('img/itinerary/' ~ image.name ) }}" alt="Image" class="image-table">
+                {% else %}
+                    <p>No image found</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
